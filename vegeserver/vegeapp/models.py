@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-import mongoengine
+from mongoengine import Document, EmbeddedDocument
 import datetime
 from mongoengine.fields import *
 import vegeserver.config as config
