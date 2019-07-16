@@ -48,5 +48,6 @@ def search(request):
         }
         res = es.search(index='article20190413', doc_type='article', body=action)
         result_dict['hits'] = res["hits"]["hits"]
+        result_dict['searchbar'] = searchinput
     return render(request, "index.html", result_dict)
 

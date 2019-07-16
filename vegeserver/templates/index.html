@@ -36,8 +36,8 @@
         <form id="searchbar" class="form-inline" action="{% url 'search' %}" method="POST">
             {% csrf_token %}
             <div class="input-group">
-                <input type="text" class="form-control"
-                    placeholder="输入想查找的内容"
+                <input type="text" class="form-control" {% if searchbar %} placeholder="{{ searchbar }}" {% else %}
+                    placeholder="输入想查找的内容" {% endif %}
                     style="width: 10cm" name="searchinput" required>
                 <div class="input-group-append">
                     <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"
@@ -51,7 +51,7 @@
             {% if hits %}
             {% for item in hits %}
             <div class="list-group-item" style="background-color: rgb(248, 248, 248); margin-bottom:20px; padding:0px;">
-                {{ item }}
+                {{ item[_source] }}
             </div>
             {% endfor %}
             {% endif %}
