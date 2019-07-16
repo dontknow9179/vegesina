@@ -47,7 +47,11 @@ def search(request):
             }
         }
         res = es.search(index='article20190413', doc_type='article', body=action)
-        result_dict['hits'] = res["hits"]["hits"]
+        result_list = []
+        for item in res["hits"]["hits"]:
+            article = Article.objects.get(id=item['_id'])
+            result_list.append(article)
+        result_dict['hits'] = result_list
         result_dict['searchbar'] = searchinput
     return render(request, "index.html", result_dict)
 
