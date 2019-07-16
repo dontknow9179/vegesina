@@ -47,15 +47,23 @@
         </form>
     </div>
     <div class="row justify-content-center" style="margin: 20px">
-        <ul class="list-group col-sm-8" style="padding:0px">
+        <div class="list-group">
             {% if hits %}
             {% for item in hits %}
-            <div class="list-group-item" style="background-color: rgb(248, 248, 248); margin-bottom:20px; padding:0px;">
-                {{ item.title }}
-            </div>
+                <a style="margin-top: 10px" href="{{ item.url }}"
+                    class="list-group-item list-group-item-action flex-column align-items-start annoucement">
+                    
+                    <div class="d-flex w-100 align-items-center justify-content-between">
+                        <h5 class="mb-1">
+                        {{ item.title }}
+                        </h5>
+                        <small style="margin-left: 10px">{{ item.time }}</small>
+                    </div>
+                    <p class="mb-1 ml-4" style="font-size: 14px; white-space: pre-wrap">{{ item.content }}</p>            
+                </a>
             {% endfor %}
             {% endif %}
-        </ul>
+        </div>
     </div>
     
 </body>
