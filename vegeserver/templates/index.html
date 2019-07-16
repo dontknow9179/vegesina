@@ -33,11 +33,12 @@
 
 <body>
     <div class="row justify-content-center" style="margin: 20px">
-        <form class="form-inline" action="search#TODO">
+        <form id="searchbar" class="form-inline" action="{% url 'search' %}" method="POST">
+            {% csrf_token %}
             <div class="input-group">
                 <input type="text" class="form-control"
-                    placeholder="search"
-                    style="width: 10cm">
+                    placeholder="输入想查找的内容"
+                    style="width: 10cm" name="searchinput" required>
                 <div class="input-group-append">
                     <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"
                             aria-hidden="true"></i></button>
