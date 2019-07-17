@@ -47,7 +47,7 @@
     <nav class="navbar navbar-light fixed-top bg-white" style="margin: 0px; padding: 20px">
         <form id="searchbar" class="offset-md-2 form-inline" action="{% url 'search' %}" method="POST">
             {% csrf_token %}
-            <div class="input-group" style="margin-left: 10px">
+            <div class="input-group" style="margin-left: 5px">
                 <input type="text" class="form-control" {% if searchbar %} value="{{ searchbar }}" {% else %}
                     placeholder="输入想查找的内容" {% endif %}
                     style="width: 10cm" name="searchinput" required>
@@ -58,7 +58,7 @@
             </div>
         </form>
     </nav>
-    <div class="row" style="margin: 20px">
+    <div class="row" style="margin-top: 80px; margin-left: 20px">
         <div class="offset-md-2 col-md-9 list-group">
             {% if hits %}
             {% for item in hits %}
