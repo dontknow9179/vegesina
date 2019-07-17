@@ -32,10 +32,10 @@
 </head>
 
 <body>
-    <div class="row justify-content-center" style="margin: 20px">
-        <form id="searchbar" class="form-inline" action="{% url 'search' %}" method="POST">
+    <div class="row" style="margin: 20px">
+        <form id="searchbar" class="offset-md-2 form-inline" action="{% url 'search' %}" method="POST">
             {% csrf_token %}
-            <div class="input-group">
+            <div class="input-group" style="padding:5px">
                 <input type="text" class="form-control" {% if searchbar %} value="{{ searchbar }}" {% else %}
                     placeholder="输入想查找的内容" {% endif %}
                     style="width: 10cm" name="searchinput" required>
@@ -46,21 +46,25 @@
             </div>
         </form>
     </div>
-    <div class="row justify-content-center" style="margin: 20px">
-        <div class="list-group col-8">
+    <div class="row" style="margin: 20px">
+        <div class="offset-md-2 col-md-9 list-group">
+            <div style="border: 0px" class="list-group-item align-items-start">
+                <a href="#" class="row" style="padding:0px; margin-bottom: 1px; font-size: 16px">标题标题标题标题标题标题标题</a>
+                <a href="#" class="row" style="padding:0px; margin-bottom: 1px; font-size: 13px; color:rgb(18, 153, 18); text-decoration: none">urlurlurlurlurlurl</a>
+                <p class="row" style="padding:0px; margin-bottom: 1px; font-size: 14px">内容内容内容内容内容内容内容内容内容</p>
+            </div>
+                   
+        </div>
+    </div>
+    <div class="row" style="margin: 20px">
+        <div class="offset-md-2 col-md-9 list-group">
             {% if hits %}
             {% for item in hits %}
-                <a style="margin-top: 10px" href="{{ item.url }}"
-                    class="list-group-item list-group-item-action flex-column align-items-start annoucement">
-                    
-                    <div class="d-flex w-100 align-items-center justify-content-between">
-                        <h5 class="mb-1">
-                        {{ item.title }}
-                        </h5>
-                        <small style="margin-left: 10px">{{ item.time }}</small>
-                    </div>
-                    <p class="mb-1 ml-4" style="font-size: 14px; white-space: pre-wrap">{{ item.content }}</p>            
-                </a>
+            <div style="border: 0px" class="list-group-item align-items-start">
+                <a href="{{ item.url }}" class="row" style="padding:0px; margin-bottom: 1px; font-size: 16px">{{ item.title }}</a>
+                <a href="{{ item.url }}" class="row" style="padding:0px; margin-bottom: 1px; font-size: 13px; color:rgb(18, 153, 18); text-decoration: none">{{ item.url }}</a>
+                <p class="row" style="padding:0px; margin-bottom: 1px; font-size: 14px">{{ item.content }}</p>
+            </div>
             {% endfor %}
             {% endif %}
         </div>
