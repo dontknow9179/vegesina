@@ -32,13 +32,15 @@ def search(request):
                         },
                         {
                             "match": {
-                                "content": ""
+                                "content": searchinput
                             }
                         }
-                    ],
-                    "must": [
-
                     ]
+                }
+            },
+            "highlight":{
+                "fields":{
+                    "content":{}
                 }
             },
             "size": 10,
