@@ -28,6 +28,15 @@
     <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+
+    <script type="text/javascript">
+        function timelineSearch() {
+            var form = document.getElementById("searchbar");
+            form.action = "{% url 'timeline' %}"
+            form.submit();
+        }
+    </script>
+    
     <style type="text/css">
         a:link {
             color:rgb(8, 53, 199);
@@ -63,6 +72,8 @@
                             aria-hidden="true"></i></button>
                 </div>
             </div>
+            <button onclick="timelineSearch()" class="btn btn-outline-info" style="margin-left: 15px" title="时间线搜索"><i
+                class="far fa-clock"></i></button>
         </form>
     </nav>
     <div class="row" style="margin-top: 80px; margin-left: 20px">

@@ -28,24 +28,62 @@
     <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
+    <script type="text/javascript">
+        function timelineSearch() {
+            var form = document.getElementById("searchbar");
+            form.action = "{% url 'timeline' %}"
+            form.submit();
+        }
+    </script>
     <style type="text/css">
         a:link {
-            color:rgb(8, 53, 199);
-            text-decoration:none;
+            color: rgb(8, 53, 199);
+            text-decoration: none;
         }
+
         a:visited {
             color: rgb(110, 67, 150);
             text-decoration: none;
         }
+
         a:hover {
             text-decoration: underline;
         }
+
         .content {
-            overflow : hidden;
+            overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 2;
         }
-    </style>    
+    </style>
 </head>
+
+<body>
+    <nav class="navbar navbar-light fixed-top bg-white" style="margin: 0px; padding: 20px">
+        <form id="searchbar" class="offset-md-2 form-inline" action="{% url 'search' %}" method="POST">
+
+            <div class="input-group" style="margin-left: 5px">
+                <input type="text" class="form-control" value="搜索内容" style="width: 10cm" name="searchinput" required>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"
+                            aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <button onclick="timelineSearch()" class="btn btn-outline-info" style="margin-left: 15px" title="时间线搜索"><i
+                    class="far fa-clock"></i></button>
+        </form>
+    </nav>
+    <div class="row" style="margin-top: 80px; margin-left: 20px">
+        <div class="offset-md-2 col-md-7 list-group">
+            <div style="border: 0px" class="list-group-item align-items-start">
+                <a href="#" class="row" style="padding:0px; margin-bottom: 1px; font-size: 16px">标题标题标题标题标题标题标题</a>
+                <a href="#" class="row"
+                    style="padding:0px; margin-bottom: 1px; font-size: 13px; color:rgb(18, 153, 18); text-decoration: none">urlurlurlurlurlurl</a>
+                <p class="row content" style="white-space: pre-wrap; padding:0px; margin-bottom: 1px; font-size: 14px">
+                    ewhic aoewhx awehicoae wcxheocc</p>
+            </div>
+        </div>
+    </div>
+</body>
