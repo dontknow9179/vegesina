@@ -23,3 +23,9 @@ urlpatterns = [
     path('timeline', view.timeline, name="timeline"),
     path('admin/', admin.site.urls),   
 ]
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(r'/favicon.ico', document_root='static/images/favicon.ico')
