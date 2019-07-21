@@ -58,6 +58,7 @@ def search(request):
         result_dict['searchbar'] = searchinput
     return render(request, "index.html", result_dict)
 
+
 def timeline(request):
     result_dict = {}
     if request.method == 'POST':
@@ -94,12 +95,14 @@ def timeline(request):
                 "include": ""
             }
         }
+        
+
         res = es.search(index='article20190413', doc_type='article', body=action)
         result_list = []
         for item in res["hits"]["hits"]:
-            article = Article.objects.get(id=item['_id'])
+            article = Article.objects.get(id=item["_id"])
             result_list.append(article)
-        result_list.sort(key=lambda item: item['_source']['date'])
+        result_list.sort(key=lambda item: item["time"])
         result_dict['hits'] = result_list
         result_dict['searchbar'] = searchinput
     return render(request, "index.html", result_dict)
