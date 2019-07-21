@@ -35,7 +35,7 @@ def search(request):
                                 "content": searchinput
                             }
                         }
-                    ]
+                    ]    
                 }
             },
             "highlight":{
@@ -74,9 +74,11 @@ def timeline(request):
                                     "boost": 1.5
                                 }
                             }
-                        },
+                        }
+                    ],
+                    "must":[
                         {
-                            "match": {
+                            "match":{
                                 "content": searchinput
                             }
                         }
@@ -90,10 +92,13 @@ def timeline(request):
             },
             "sort":[
                 {
+                    "_score": "desc"
+                },
+                {
                     "date": "asc"
                 }
             ],
-            "size": 10,
+            "size": 30,
             "_source": {
                 "include": ""
             }
