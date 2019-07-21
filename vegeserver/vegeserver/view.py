@@ -92,7 +92,7 @@ def timeline(request):
                 {
                     "date": "asc"
                 }
-            ]
+            ],
             "size": 10,
             "_source": {
                 "include": ""
