@@ -3,6 +3,7 @@ from django.shortcuts import render
 from vegeapp.models import Article
 from elasticsearch import Elasticsearch
 import json
+from operator import itemgetter
 
 def homepage(request):
     # result = Article.objects.get(id="articleID-d7971f82-38f0-4060-b065-5149a5413c8c")
@@ -74,15 +75,13 @@ def timeline(request):
                                     "boost": 1.5
                                 }
                             }
-                        }
-                    ],
-                    "must":[
+                        },
                         {
-                            "match":{
+                            "match": {
                                 "content": searchinput
                             }
                         }
-                    ]
+                    ]    
                 }
             },
             "highlight":{
@@ -90,15 +89,7 @@ def timeline(request):
                     "content":{}
                 }
             },
-            "sort":[
-                {
-                    "_score": "desc"
-                },
-                {
-                    "date": "asc"
-                }
-            ],
-            "size": 30,
+            "size": 10,
             "_source": {
                 "include": ""
             }
@@ -108,6 +99,7 @@ def timeline(request):
         for item in res["hits"]["hits"]:
             article = Article.objects.get(id=item['_id'])
             result_list.append(article)
+        result_list.sort(key=lambda item: item['_source']['date'])
         result_dict['hits'] = result_list
         result_dict['searchbar'] = searchinput
     return render(request, "index.html", result_dict)
