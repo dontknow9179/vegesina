@@ -56,6 +56,7 @@ def search(request):
             result_list.append(article)
         result_dict['hits'] = result_list
         result_dict['searchbar'] = searchinput
+        result_dict['display'] = 'search'
     return render(request, "index.html", result_dict)
 
 
@@ -105,4 +106,5 @@ def timeline(request):
         result_list.sort(key=lambda item: item["time"])
         result_dict['hits'] = result_list
         result_dict['searchbar'] = searchinput
+        result_dict['display'] = 'timeline'
     return render(request, "index.html", result_dict)
