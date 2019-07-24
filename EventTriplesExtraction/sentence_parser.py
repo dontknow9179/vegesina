@@ -10,7 +10,7 @@ from pyltp import Segmentor, Postagger, Parser, NamedEntityRecognizer, SementicR
 
 class LtpParser:
     def __init__(self):
-        LTP_DIR = "./ltp_data"
+        LTP_DIR = "ltp_data_v3.4.0"     #模块路径
         self.segmentor = Segmentor()
         self.segmentor.load(os.path.join(LTP_DIR, "cws.model"))
 
@@ -24,7 +24,7 @@ class LtpParser:
         self.recognizer.load(os.path.join(LTP_DIR, "ner.model"))
 
         self.labeller = SementicRoleLabeller()
-        self.labeller.load(os.path.join(LTP_DIR, 'pisrl.model'))
+        self.labeller.load(os.path.join(LTP_DIR, 'pisrl_win.model'))
 
     '''语义角色标注'''
     def format_labelrole(self, words, postags):
