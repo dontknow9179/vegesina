@@ -3,3 +3,4 @@ __pycache__/
 venv/
 *.pyc
 *.swp
+ltp_data_v3.4.0/
