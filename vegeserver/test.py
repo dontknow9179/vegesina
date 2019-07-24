@@ -1,1 +1,1 @@
-import pyltp
+from pyltp import Segmentor
