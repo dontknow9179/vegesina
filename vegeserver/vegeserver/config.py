@@ -25,6 +25,6 @@ EXPLORE_SUMMARY_METHOD = 'centroid'  # textrank or centroid
 STOPWORDS_CN = 'data/stopwords/chineseStopWords.txt'
 
 
-LTP_DATA_DIR = 'HotSpotServer/component/event_analyze/ltp_data_v3.4.0'
+LTP_DATA_DIR = 'EventTriplesExtraction/ltp_data_v3.4.0'
 OUTPUT_PATH = 'HotSpotServer/component/event_analyze/data_path_save/1521112368/'
 WORD2ID_PATH = 'HotSpotServer/component/event_analyze/data_path/word2id.pkl'
