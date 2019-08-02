@@ -1,12 +1,12 @@
 import os
-import vegeserver.config as config
+
 from django.test import TestCase
 from pyltp import Segmentor, Postagger, Parser, NamedEntityRecognizer, SementicRoleLabeller
 
 
 class LtpParser:
     def __init__(self):
-        LTP_DIR = config.LTP_DATA_DIR
+        LTP_DIR = '../../EventTriplesExtraction/ltp_data_v3.4.0'
         print(LTP_DIR)
         self.segmentor = Segmentor()
         self.segmentor.load(os.path.join(LTP_DIR, "cws.model"))
@@ -21,7 +21,7 @@ class LtpParser:
         self.recognizer.load(os.path.join(LTP_DIR, "ner.model"))
 
         self.labeller = SementicRoleLabeller()
-        self.labeller.load(os.path.join(LTP_DIR, 'pisrl.model'))
+        self.labeller.load(os.path.join(LTP_DIR, 'pisrl_win.model'))
 
     '''语义角色标注'''
     def format_labelrole(self, words, postags):
@@ -96,3 +96,11 @@ class LtpParser:
         roles_dict = self.format_labelrole(words, postags)
         return words, postags, child_dict_list, roles_dict, format_parse_list
 
+parse = LtpParser()
+sentence = '李克强总理今天来我家了,我感到非常荣幸'
+words, postags, child_dict_list, roles_dict, format_parse_list = parse.parser_main(sentence)
+print(words, len(words))
+print(postags, len(postags))
+print(child_dict_list, len(child_dict_list))
+print(roles_dict)
+print(format_parse_list, len(format_parse_list))
