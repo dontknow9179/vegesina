@@ -1,5 +1,4 @@
 import os
-
 from django.test import TestCase
 from pyltp import Segmentor, Postagger, Parser, NamedEntityRecognizer, SementicRoleLabeller
 
@@ -7,7 +6,6 @@ from pyltp import Segmentor, Postagger, Parser, NamedEntityRecognizer, SementicR
 class LtpParser:
     def __init__(self):
         LTP_DIR = '../../EventTriplesExtraction/ltp_data_v3.4.0'
-        print(LTP_DIR)
         self.segmentor = Segmentor()
         self.segmentor.load(os.path.join(LTP_DIR, "cws.model"))
 
@@ -96,12 +94,12 @@ class LtpParser:
         roles_dict = self.format_labelrole(words, postags)
         return words, postags, child_dict_list, roles_dict, format_parse_list
 
-parse = LtpParser()
-sentence = '李克强总理今天来我家了,我感到非常荣幸'
-words, postags, child_dict_list, roles_dict, format_parse_list = parse.parser_main(sentence)
-print(words, len(words))
-print(postags, len(postags))
-print(child_dict_list, len(child_dict_list))
+# parse = LtpParser()
+# sentence = '李克强总理今天来我家了,我感到非常荣幸'
+# words, postags, child_dict_list, roles_dict, format_parse_list = parse.parser_main(sentence)
+# print(words, len(words))
+# print(postags, len(postags))
+# print(child_dict_list, len(child_dict_list))
 # print(roles_dict)
 # print(format_parse_list, len(format_parse_list))
-print(parse.get_verbs('缘尽至此？景甜张继科猝不及防的分手？景甜九字回应引网友热议'))
+# print(parse.get_verbs('缘尽至此？景甜张继科猝不及防的分手？景甜九字回应引网友热议'))
