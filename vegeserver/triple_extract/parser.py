@@ -102,5 +102,6 @@ words, postags, child_dict_list, roles_dict, format_parse_list = parse.parser_ma
 print(words, len(words))
 print(postags, len(postags))
 print(child_dict_list, len(child_dict_list))
-print(roles_dict)
-print(format_parse_list, len(format_parse_list))
+# print(roles_dict)
+# print(format_parse_list, len(format_parse_list))
+print(parse.get_verbs('缘尽至此？景甜张继科猝不及防的分手？景甜九字回应引网友热议'))
