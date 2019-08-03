@@ -1,10 +1,10 @@
 from pyltp import Segmentor,Postagger,NamedEntityRecognizer,SentenceSplitter,Parser,SementicRoleLabeller
 import os
-import sys
-sys.path.append('../vegeserver/')
-import config as config
+# import sys
+# sys.path.append('../vegeserver/')
+# import config as config
 
-LTP_DATA_DIR = '../../EventTriplesExtraction/ltp_data_v3.4.0'
+LTP_DATA_DIR = '../EventTriplesExtraction/ltp_data_v3.4.0'
 cws_model_path = os.path.join(LTP_DATA_DIR, 'cws.model')
 pos_model_path = os.path.join(LTP_DATA_DIR, 'pos.model')# 词性标注模型路径，模型名称为`pos.model`
 ner_model_path = os.path.join(LTP_DATA_DIR, 'ner.model')  # 命名实体识别模型路径，模型名称为`pos.model`
@@ -17,7 +17,7 @@ print('\n'.join(sents))
 
 segmentor=Segmentor() # 初始化实例
 segmentor.load(cws_model_path)  # 加载模型
-words=segmentor.segment('熊高雄你吃饭了吗') # 分词结果
+words=segmentor.segment('元芳你怎么看') # 分词结果
 print(type(words))
 print('\t'.join(words))
  
