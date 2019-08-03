@@ -47,6 +47,7 @@ labeller.load(srl_model_path)
 roles = labeller.label(words, postags, arcs)  # 语义角色标注
 
 for role in roles:
+    print(len(role.arguments))
     print(role.index, "".join(
         ["%s:(%d,%d)" % (arg.name, arg.range.start, arg.range.end) for arg in role.arguments]))
 
