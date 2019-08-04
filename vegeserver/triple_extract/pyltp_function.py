@@ -1,5 +1,6 @@
 import os
 from pyltp import Segmentor, Postagger, Parser, NamedEntityRecognizer, SementicRoleLabeller
+from django.test import TestCase
 
 
 class LtpParser:
@@ -30,7 +31,7 @@ class LtpParser:
             # role.index 代表谓词的索引，从0开始
             # role.arguments 代表关于该谓词的若干语义角色：
             #   其中arg.name 表示语义角色内容，arg.range.start 表示语义角色起始词的位置的索引，arg.range.end 表示语义角色结束词的位置的索引
-        return roles_dict, roles
+        return roles_dict
 
     '''句法分析---为句子中的每个词语维护一个保存句法依存儿子节点的字典'''
     def build_parse_child_dict(self, words, postags, arcs):
@@ -90,18 +91,22 @@ class LtpParser:
         postags = list(self.postagger.postag(words))
         arcs = self.parser.parse(words, postags)
         child_dict_list, format_parse_list = self.build_parse_child_dict(words, postags, arcs)
-        roles_dict, roles = self.format_labelrole(words, postags)
-        return words, postags, child_dict_list, roles_dict, roles, format_parse_list
+        roles_dict = self.format_labelrole(words, postags)
+        return words, postags, child_dict_list, roles_dict, format_parse_list
 
-parse = LtpParser()
-sentence = '元芳怎么看'
-words, postags, child_dict_list, roles_dict, roles, format_parse_list = parse.parser_main(sentence)
-print(words, len(words))
-# print(postags, len(postags))
-# print(child_dict_list, len(child_dict_list))
-print(roles_dict)
-for role in roles:
-    print(role.index, "".join(
-        ["%s:(%d,%d)" % (arg.name, arg.range.start, arg.range.end) for arg in role.arguments]))
-# print(format_parse_list, len(format_parse_list))
-# print(parse.get_verbs('缘尽至此？景甜张继科猝不及防的分手？景甜九字回应引网友热议'))
+
+class ParserTest(TestCase):
+
+    def test_ltp(self):
+        parse = LtpParser()
+        sentence = '元芳怎么看'
+        words, postags, child_dict_list, roles_dict, roles, format_parse_list = parse.parser_main(sentence)
+        print(words, len(words))
+        print(postags, len(postags))
+        print(child_dict_list, len(child_dict_list))
+        print(roles_dict)
+        for role in roles:
+            print(role.index, "".join(
+                ["%s:(%d,%d)" % (arg.name, arg.range.start, arg.range.end) for arg in role.arguments]))
+        # print(format_parse_list, len(format_parse_list))
+        # print(parse.get_verbs('缘尽至此？景甜张继科猝不及防的分手？景甜九字回应引网友热议'))

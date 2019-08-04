@@ -1,3 +1,7 @@
 import os
-from triple_extract.pyltp_function import *
-parser = LtpParser()
+from triple_extract.triple_extract import *
+
+
+# segmentor = extractor.parser.segmentor
+# postagger = extractor.parser.postagger
+# ltp_parser = extractor.parser.parser
