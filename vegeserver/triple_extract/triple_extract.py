@@ -135,8 +135,8 @@ class TripleExtractor:
         return svos
 
 extractor = TripleExtractor()
-svos = extractor.triples_main('景甜疑似与张继科分手, 男方已洗掉纹身, 预计年前官宣!',method='srl')
-print(svos)
+# svos = extractor.triples_main('景甜疑似与张继科分手, 男方已洗掉纹身, 预计年前官宣!',method='srl')
+# print(svos)
 
 class TripleTest(TestCase):
 

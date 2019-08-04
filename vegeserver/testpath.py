@@ -1,5 +1,5 @@
 import os
-from triple_extract.triple_extract import *
+from triple_extract.spo_extract import *
 
 
 # segmentor = extractor.parser.segmentor
