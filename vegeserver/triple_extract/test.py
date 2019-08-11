@@ -1,8 +1,6 @@
 from pyltp import Segmentor,Postagger,NamedEntityRecognizer,SentenceSplitter,Parser,SementicRoleLabeller
 import os
-# import sys
-# sys.path.append('../vegeserver/')
-# import config as config
+
 
 LTP_DATA_DIR = '../EventTriplesExtraction/ltp_data_v3.4.0'
 cws_model_path = os.path.join(LTP_DATA_DIR, 'cws.model')
