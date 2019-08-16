@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 from elasticsearch import Elasticsearch
 import json
+from triple_extract.triple_extract import *
 
 MONGODB_DATABASE_NAME = 'Sina'
 MONGODB_HOST = '10.141.212.160'
@@ -39,8 +40,16 @@ action = {
 res = es.search(index='article20190413', doc_type='article', body=action)
 
 for item in res["hits"]["hits"]:
-    print(item['_id'])
-    print(item['_source']['title'])
-    print(item['_source']['content'])
-    # article = collection.find_one({"_id":item['_id']})
-    # print(article['content'])
+    # print(item['_id'])
+    # print(item['_source']['title'])
+    # print(item['_source']['content'])
+    article = collection.find_one({"_id":item['_id']})
+    title = article['title']
+    print(title)
+    svos = extractor.triples_main_vege(title)    
+    content = article['content']
+    print(content)
+    svos += extractor.triples_main_vege(content,sentence_count=4)
+    print(svos)
+    
+
