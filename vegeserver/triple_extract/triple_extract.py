@@ -39,7 +39,7 @@ class TripleExtractor:
         return svos
 
 
-    def dp_vege(self, words, postags, child_dict_list, arcs, roles_dict):
+    def dp_vege(self, words, postags, child_dict_list, arcs, roles_dict, article_id):
         svos = []
         for index in range(len(postags)):
             # 如果语义角色标记为空，则使用依存句法进行抽取
@@ -52,11 +52,32 @@ class TripleExtractor:
                 # 主谓宾
                 if 'SBV' in child_dict and 'VOB' in child_dict:
                     r = words[index]
-                    # e1 = self.complete_e(words, postags, child_dict_list, child_dict['SBV'][0])
                     e1 = words[child_dict['SBV'][0]]
-                    # e2 = self.complete_e(words, postags, child_dict_list, child_dict['VOB'][0])
                     e2 = words[child_dict['VOB'][0]]
-                    svos.append([e1, r, e2])
+                    svo = {}
+                    svo['s'] = e1
+                    svo['v'] = r
+                    svo['o'] = e2
+                    svo['article_id'] = article_id
+                    svos.append(svo)
+                elif 'SBV' in child_dict and 'VOB' not in child_dict:
+                    r = words[index]
+                    e1 = words[child_dict['SBV'][0]]
+                    svo = {}
+                    svo['s'] = e1
+                    svo['v'] = r
+                    svo['o'] = ''
+                    svo['article_id'] = article_id
+                    svos.append(svo)
+                elif 'SBV' not in child_dict and 'VOB' in child_dict:
+                    r = words[index]
+                    e2 = words[child_dict['VOB'][0]]
+                    svo = {}
+                    svo['s'] = ''
+                    svo['v'] = r
+                    svo['o'] = e2
+                    svo['article_id'] = article_id
+                    svos.append(svo)
         return svos
 
 
@@ -132,7 +153,7 @@ class TripleExtractor:
         return prefix + words[word_index] + postfix
 
 
-    def triples_main_vege(self, content, sentence_count=1):
+    def triples_main_vege(self, content, article_id, sentence_count=1):
         """
         对输入的文本，进行三元组提取
         :param content: 输入文本，可以为多个句子
@@ -144,7 +165,7 @@ class TripleExtractor:
         for i, sentence in enumerate(sentences):
             if i < sentence_count:
                 words, postags, child_dict_list, roles_dict, arcs = self.parser.parser_main(sentence)
-                svo = self.dp_vege(words, postags, child_dict_list, arcs, roles_dict)
+                svo = self.dp_vege(words, postags, child_dict_list, arcs, roles_dict, article_id)
                 svos += svo
         return svos
 
