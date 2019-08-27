@@ -34,11 +34,13 @@ action = {
             ]    
         }
     },
+    "from": 10,
     "size": 10,
     "_source": {
         "include": ""
     }
 }
+
 res = es.search(index='article20190413', doc_type='article', body=action)
 # svos = extractor.triples_main_vege("王思聪新女友想靠王思聪上位，王思聪怒怼现任女友？") 
 # print(svos)
@@ -46,11 +48,11 @@ for item in res["hits"]["hits"]:
     article = collection.find_one({"_id":item['_id']})
     title = article['title']
     print(title)
-    #svos = extractor.triples_main_vege(title,article['_id']) 
-    # print(svos)   
+    svos = extractor.triples_main_vege(title,article['_id']) 
+    print(svos)   
     content = article['content']
     print(content)
-    #svos += extractor.triples_main_vege(content,sentence_count=4,article['_id'])
+    svos += extractor.triples_main_vege(content,article['_id'],sentence_count=4)
     print(svos)
     # if len(svos) > 0:
     #     collection_new.insert_many(svos)

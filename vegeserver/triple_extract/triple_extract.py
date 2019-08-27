@@ -39,17 +39,11 @@ class TripleExtractor:
         return svos
 
 
-    def dp_vege(self, words, postags, child_dict_list, arcs, roles_dict, article_id):
+    def dp_vege(self, words, postags, child_dict_list, article_id):
         svos = []
         for index in range(len(postags)):
-            # 如果语义角色标记为空，则使用依存句法进行抽取
-            # if postags[index] == 'v':
-            if postags[index]:              # 这里返回的词都是子元素的，而且不一定是动词
-                # 抽取以谓词为中心的事实三元组
-                # print("words:{}".format(words[index]))
-                child_dict = child_dict_list[index]
-                # print("child_dict:{}".format(child_dict))
-                # 主谓宾
+            if postags[index]:              
+                child_dict = child_dict_list[index]    
                 if 'SBV' in child_dict and 'VOB' in child_dict:
                     r = words[index]
                     e1 = words[child_dict['SBV'][0]]
@@ -164,8 +158,8 @@ class TripleExtractor:
         svos = []
         for i, sentence in enumerate(sentences):
             if i < sentence_count:
-                words, postags, child_dict_list, roles_dict, arcs = self.parser.parser_main(sentence)
-                svo = self.dp_vege(words, postags, child_dict_list, arcs, roles_dict, article_id)
+                words, postags, child_dict_list = self.parser.parser_main(sentence)
+                svo = self.dp_vege(words, postags, child_dict_list, article_id)
                 svos += svo
         return svos
 

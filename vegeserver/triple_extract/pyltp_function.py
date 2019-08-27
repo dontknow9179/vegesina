@@ -91,8 +91,8 @@ class LtpParser:
         postags = list(self.postagger.postag(words))
         arcs = self.parser.parse(words, postags)
         child_dict_list, format_parse_list = self.build_parse_child_dict(words, postags, arcs)
-        roles_dict = self.format_labelrole(words, postags)
-        return words, postags, child_dict_list, roles_dict, format_parse_list
+        # roles_dict = self.format_labelrole(words, postags)
+        return words, postags, child_dict_list
 
 
 class ParserTest(TestCase):
