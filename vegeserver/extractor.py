@@ -52,7 +52,7 @@ for item in res["hits"]["hits"]:
     print(svos)   
     content = article['content']
     print(content)
-    svos += extractor.triples_main_vege(content,article['_id'],sentence_count=4)
+    svos += extractor.triples_main_vege(content,article['_id'],sentence_count=1)
     print(svos)
     # if len(svos) > 0:
     #     collection_new.insert_many(svos)
