@@ -10,14 +10,13 @@ conn = MongoClient(MONGODB_HOST, MONGODB_PORT)
 db = conn[MONGODB_DATABASE_NAME]
 collection = db[MONGODB_ARTICLE_COLLECTION]
 
-MONGODB_DATABASE_NAME_TO = 'local'
-MONGODB_HOST_TO = '10.132.141.99'
-MONGODB_PORT_TO = 27017
-MONGODB_ARTICLE_COLLECTION_TO = 'vege_sina'  # articleTest
-conn = MongoClient(MONGODB_HOST_TO, MONGODB_PORT_TO)
-db = conn[MONGODB_DATABASE_NAME_TO]
-
-collection_to = db[MONGODB_ARTICLE_COLLECTION_TO]
+MONGODB_DATABASE_NAME = 'local'
+MONGODB_HOST = '10.132.141.99'
+MONGODB_PORT = 27017
+MONGODB_ARTICLE_COLLECTION = 'vege_sina'  # articleTest
+conn = MongoClient(MONGODB_HOST, MONGODB_PORT)
+db = conn[MONGODB_DATABASE_NAME]
+collection_to = db[MONGODB_ARTICLE_COLLECTION]
 
 articles = collection.find({})
 for article in articles:
