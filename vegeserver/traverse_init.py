@@ -19,11 +19,16 @@ db = conn[MONGODB_DATABASE_NAME]
 collection_to = db[MONGODB_ARTICLE_COLLECTION]
 
 articles = collection.find({})
+count = 0
 for article in articles:
     try:
-        svos = extractor.triples_main_vege(article['title'],article['_id'])
+        svos = extractor.triples_main_vege(article['content'],article['_id'],2)
         if len(svos) > 0:
             collection_to.insert_many(svos)
+            count += 1
+            if count % 100 == 0:
+                print(count) 
     except Exception as e:
         print('Reason:', e)
         print(article['_id'])
+        print(count)
